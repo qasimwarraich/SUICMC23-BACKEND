@@ -19,13 +19,16 @@ func main() {
 	app := pocketbase.New()
 
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
-		e.Router.AddRoute(echo.Route{
+		_, err := e.Router.AddRoute(echo.Route{
 			Method: http.MethodGet,
 			Path:   "/api/race-numbers",
 			Handler: func(c echo.Context) error {
 				q := app.DB().NewQuery("SELECT race_number FROM participants")
 				s := make([]int, 0)
-				q.Column(&s)
+				err := q.Column(&s)
+				if err != nil {
+					return err
+				}
 
 				return c.JSON(http.StatusOK, s)
 			},
@@ -34,13 +37,16 @@ func main() {
 			},
 		})
 
-		e.Router.AddRoute(echo.Route{
+		_, err = e.Router.AddRoute(echo.Route{
 			Method: http.MethodGet,
 			Path:   "/api/racer-names",
 			Handler: func(c echo.Context) error {
 				q := app.DB().NewQuery("SELECT first_name FROM participants")
 				s := make([]string, 0)
-				q.Column(&s)
+				err = q.Column(&s)
+				if err != nil {
+					return err
+				}
 
 				return c.JSON(http.StatusOK, s)
 			},
@@ -48,7 +54,9 @@ func main() {
 				apis.ActivityLogger(app),
 			},
 		})
-
+		if err != nil {
+			return err
+		}
 		return nil
 	})
 
@@ -71,7 +79,10 @@ func main() {
 		}
 
 		buf := new(bytes.Buffer)
-		tmpl.Execute(buf, templateData)
+		err = tmpl.Execute(buf, templateData)
+		if err != nil {
+			fmt.Println(err)
+		}
 
 		message := &mailer.Message{
 			From: mail.Address{
