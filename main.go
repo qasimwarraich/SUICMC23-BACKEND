@@ -68,6 +68,11 @@ func main() {
 			fmt.Println("Error loading .env file")
 		}
 
+		nickName := e.Record.GetString("nick_name")
+		if nickName == "" {
+			nickName = e.Record.GetString("first_name")
+		}
+
 		templateData := struct {
 			Name  string
 			URL   string
