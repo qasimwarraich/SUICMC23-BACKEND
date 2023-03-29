@@ -7,7 +7,9 @@ import (
 	"log"
 	"net/http"
 	"net/mail"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
@@ -61,16 +63,21 @@ func main() {
 	})
 
 	app.OnRecordAfterCreateRequest("participants").Add(func(e *core.RecordCreateEvent) error {
+		err := godotenv.Load()
+		if err != nil {
+			fmt.Println("Error loading .env file")
+		}
+
 		templateData := struct {
 			Name  string
 			URL   string
 			TWINT string
 			Logo  string
 		}{
-			Name:  e.Record.GetString("nick_name"),
-			URL:   "https://suicmc23.vercel.app/cream",
-			TWINT: "https://suicmc23.vercel.app/_app/immutable/assets/reg_twint_sm-72c3cf7b.png",
-			Logo:  "https://suicmc23.vercel.app/_app/immutable/assets/warnwest-721abf10.png",
+			Name:  nickName,
+			URL:   os.Getenv("PAYMENT_URL"),
+			TWINT: os.Getenv("TWINT_IMAGE"),
+			Logo:  os.Getenv("LOGO_IMAGE"),
 		}
 
 		tmpl, err := template.ParseFiles("assets/registration_email_template.html")
