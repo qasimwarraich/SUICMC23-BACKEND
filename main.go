@@ -73,16 +73,31 @@ func main() {
 			nickName = e.Record.GetString("first_name")
 		}
 
+		emailAddress := e.Record.GetString("email")
+		raceNumber := e.Record.GetInt("race_number")
+		intendedPayment := e.Record.GetInt("intended_payment")
+		paymentMethod := e.Record.GetString("payment_method")
+
 		templateData := struct {
-			Name  string
-			URL   string
-			TWINT string
-			Logo  string
+			Name            string
+			Email           string
+			RaceNumber      int
+			URL             string
+			TWINT           string
+			Logo            string
+			PaymentMethod   string
+			IntendedPayment int
+			RegEmail        string
 		}{
-			Name:  nickName,
-			URL:   os.Getenv("PAYMENT_URL"),
-			TWINT: os.Getenv("TWINT_IMAGE"),
-			Logo:  os.Getenv("LOGO_IMAGE"),
+			Name:            nickName,
+			Email:           emailAddress,
+			RaceNumber:      raceNumber,
+			URL:             os.Getenv("PAYMENT_URL"),
+			TWINT:           os.Getenv("TWINT_IMAGE"),
+			Logo:            os.Getenv("LOGO_IMAGE"),
+			PaymentMethod:   paymentMethod,
+			IntendedPayment: intendedPayment,
+			RegEmail:        os.Getenv("REG_EMAIL"),
 		}
 
 		tmpl, err := template.ParseFiles("assets/registration_email_template.html")
@@ -98,12 +113,12 @@ func main() {
 
 		message := &mailer.Message{
 			From:    mail.Address{Name: app.Settings().Meta.SenderName, Address: app.Settings().Meta.SenderAddress},
-			To:      []mail.Address{{Address: "example@example.com"}},
+			To:      []mail.Address{{Address: emailAddress}},
 			Bcc:     []mail.Address{},
 			Cc:      []mail.Address{},
 			Subject: "Thank you for registering for SUICMC23 BERN",
 			HTML:    buf.String(),
-			Text:    "",
+			Text:    buf.String(),
 			Headers: map[string]string{},
 		}
 

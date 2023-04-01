@@ -1,101 +1,121 @@
 <html>
-<meta charset="utf-8" />
-<link rel="stylesheet" href="https://use.typekit.net/owf7wye.css" />
-<style>
-    body {
-        font-family: 'aktiv-grotesk';
-        padding-left: 10%;
-        padding-right: 10%;
-    }
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://use.typekit.net/owf7wye.css" />
+    <style>
+        body {
+            font-family: 'aktiv-grotesk';
+            padding-left: 10%;
+            padding-right: 10%;
+        }
 
-    h1,
-    h2,
-    h3,
-    a {
-        color: #ff3e19;
-    }
-</style>
+        h1,
+        h2,
+        h3,
+        h4,
+        span,
+        a {
+            color: #ff3e19;
+        }
+    </style>
 
-<body>
-    <div style="
+    <body>
+        <div
+            style="
                 display: flex;
                 flex-direction: column;
                 width: 100%;
                 align-items: center;
                 justify-content: center;
-            ">
-        <h1 style="text-align: center">
-            Thank you for registering for SUICMC23 BERN!
-        </h1>
-        <img src="{{.Logo}}" width="200" alt="SUICMC23 Logo" />
+            "
+        >
+            <h1 style="text-align: center">
+                Thank you for registering for SUICMC23 BERN!
+            </h1>
+            <img src="{{.Logo}}" width="200" alt="SUICMC23 Logo" />
 
-        <br />
-        <p>
-            Hello {{.Name}},
             <br />
-            We are looking forward to welcoming you to Bern at the end of
-            May and thank you very much for your registration. Lorem ipsum
-            dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-            labore culpa sint ad nisi Lorem pariatur mollit ex esse
-            exercitation amet. Nisi anim cupidatat excepteur officia.
-            Reprehenderit nostrud nostrud
-        <h2>
-            Payment Information
-        </h2>
+            <p>
+                Hello {{.Name}},
+                <br />
+                We are looking forward to welcoming you to Bern at the end of
+                May, and thank you very much for your registration. Please take
+                a moment to read through this email and feel free to
+                <a href="mailto:{{.RegEmail}}"> contact us</a> if you have any
+                questions.
 
-        <div>
-            We encourage you to pay your registration amount in advance. You can find <a href="https://suicmc23.ch/cream"
-                target="_blank">
-                payment information here.
-            </a>
+                <br />
+                <br />
+                Stay tuned of more information on our
+                <a href="https://suicmc23.ch"> website </a> and via email ❤️.
+            </p>
+
+            <h2>Payment Information</h2>
+
+            <div>
+                You indicated that you would like to pay
+                <span>{{.IntendedPayment}}CHF</span> via
+                <span>{{.PaymentMethod}}</span>. We encourage you to pay your
+                registration amount in advance. You can find
+                <a href="https://suicmc23.ch/cream" target="_blank">
+                    payment information here.
+                </a>
+            </div>
+            <h4>Please make sure to include the following information:</h4>
+            <ul style="padding-left: 100px; width: 100%; text-align: left">
+                <li>Name: {{.Name}}</li>
+                <li>Race Number:{{.RaceNumber}}</li>
+                <li>Email Address:{{.Email}}</li>
+            </ul>
+
+            <h2>Important Information</h2>
+            <ul style="padding-left: 100px; width: 100%; text-align: left">
+                <li>Please bring your own food containers and utensils!</li>
+                <li>
+                    Please organise some sleeping equipment (e.g. sleeping bag
+                    and mattress)
+                </li>
+            </ul>
+            <h2>Volunteering Information</h2>
+            <div>
+                If you want to volunteer, and haven't registered yet, please
+                <a href="https://suicmc23.ch/volunteering" target="_blank">
+                    register here.
+                </a>
+            </div>
+
+            <h2>Twint Link (Only For Registration!)</h2>
+
+            <img src="{{.TWINT}}" width="200" alt="Twint QR" />
+
+            <h2>Bank Transfer Information</h2>
+
+            <div>
+                <pre>
+Account Nr: 16-41402-0
+IBAN: CH47 0900 0000 1604 1402 0
+BIC: POFICHBEXXX
+
+Verein Schweizermeisterschaft der
+Velokurier*innen
+SUICMC23 BERN
+c/o Fabio Nef
+Dammweg 41 CH-3013 Bern
+            </pre
+                >
+            </div>
+
+            <h3>
+                Thanks again for registering. See you at the event!
+            </h3>
+
+            <h3>
+                ❤️ Chistole!!! (with respect and safety)  🦺
+            </h3>
+
+            <div style="padding-top: 10%">
+                If you have any questions please don't hesitate to
+                <a href="mailto:{{.RegEmail}}" ;>contact us.</a>
+            </div>
         </div>
-
-        <h2>
-            Important Information
-        </h2>
-        <ul style="padding-left:100px; width:100%; text-align: left;">
-            <li>
-                Bring a Tuppi
-            </li>
-        </ul>
-        <h2>
-            Volunteering Information
-        </h2>
-        <div>
-            If you want to volunteer and haven't registered, please <a href="https://suicmc23.ch/volunteering"
-                target="_blank">
-                register here.
-            </a>
-        </div>
-        </p>
-
-        We are looking forward to welcoming you to Bern at the end of May
-        and thank you very much for your registration. Lorem ipsum dolor sit
-        amet, officia excepteur ex fugiat reprehenderit enim labore culpa
-        sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-        anim cupidatat excepteur officia. Reprehenderit nostrud nostrud
-        ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla
-        est proident. Nostrud officia pariatur ut officia. Sit irure elit
-        esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-        eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt
-        velit enim. Voluptate laboris sint cupidatat ullamco ut ea
-        consectetur et est culpa et culpa duis.
-
-        <br />
-        <div style="padding-top: 5%">
-            <a href="{{.URL}}">Click here </a> for payment information.
-        </div>
-
-        <h3>Twint Link</h3>
-
-        <img src="{{.TWINT}}" width="200" alt="Twint QR" />
-        <div style="padding-top: 10%">
-            If you have any questions please don't hesistate to
-            <a href="{{.URL}}" ;>contact us.</a>
-        </div>
-    </div>
-</body>
-
+    </body>
 </html>
