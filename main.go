@@ -97,13 +97,14 @@ func main() {
 		}
 
 		message := &mailer.Message{
-			From: mail.Address{
-				Address: app.Settings().Meta.SenderAddress,
-				Name:    app.Settings().Meta.SenderName,
-			},
-			To:      mail.Address{Address: "example@example.com"},
+			From:    mail.Address{Name: app.Settings().Meta.SenderName, Address: app.Settings().Meta.SenderAddress},
+			To:      []mail.Address{{Address: "example@example.com"}},
+			Bcc:     []mail.Address{},
+			Cc:      []mail.Address{},
 			Subject: "Thank you for registering for SUICMC23 BERN",
 			HTML:    buf.String(),
+			Text:    "",
+			Headers: map[string]string{},
 		}
 
 		return app.NewMailClient().Send(message)
