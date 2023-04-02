@@ -66,6 +66,7 @@ func main() {
 		err := godotenv.Load()
 		if err != nil {
 			fmt.Println("Error loading .env file")
+			fmt.Println(err)
 		}
 
 		nickName := e.Record.GetString("nick_name")

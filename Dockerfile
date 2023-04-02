@@ -20,9 +20,9 @@ WORKDIR /pb
 RUN go get github.com/pocketbase/pocketbase
 
 RUN go build
-WORKDIR /
+WORKDIR /pb
 
 EXPOSE 8080
 
 # start PocketBase
-CMD ["/pb/suicmc23", "serve", "--http=0.0.0.0:8080"]
+CMD ["./suicmc23", "serve", "--http=0.0.0.0:8080"]
