@@ -10,6 +10,7 @@ require (
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6 // indirect
+	github.com/ajstarks/svgo v0.0.0-20200725142600-7a3c8b57fecb // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/aws/aws-sdk-go v1.44.234 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.17.7 // indirect
@@ -47,6 +48,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 // indirect
+	github.com/makiuchi-d/gozxing v0.0.0-20200903113411-25f730ed83da // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
@@ -56,6 +58,7 @@ require (
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/cobra v1.6.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/stapelberg/qrbill v0.1.9 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	go.opencensus.io v0.24.0 // indirect

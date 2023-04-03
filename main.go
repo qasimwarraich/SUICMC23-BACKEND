@@ -2,8 +2,10 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"fmt"
 	"html/template"
+	"image/png"
 	"log"
 	"net/http"
 	"net/mail"
@@ -15,6 +17,7 @@ import (
 	"github.com/pocketbase/pocketbase/apis"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/tools/mailer"
+	"github.com/stapelberg/qrbill"
 )
 
 func main() {
@@ -78,6 +81,7 @@ func main() {
 		raceNumber := e.Record.GetInt("race_number")
 		intendedPayment := e.Record.GetInt("intended_payment")
 		paymentMethod := e.Record.GetString("payment_method")
+		generatedQRImage := generatePaymentPDF(nickName, raceNumber, emailAddress, intendedPayment)
 
 		templateData := struct {
 			Name            string
@@ -89,6 +93,7 @@ func main() {
 			PaymentMethod   string
 			IntendedPayment int
 			RegEmail        string
+			QR              any
 		}{
 			Name:            nickName,
 			Email:           emailAddress,
@@ -99,6 +104,7 @@ func main() {
 			PaymentMethod:   paymentMethod,
 			IntendedPayment: intendedPayment,
 			RegEmail:        os.Getenv("REG_EMAIL"),
+			QR:              template.URL(generatedQRImage),
 		}
 
 		tmpl, err := template.ParseFiles("assets/registration_email_template.html")
@@ -201,4 +207,61 @@ func main() {
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func generatePaymentPDF(name string, raceNumber int, email string, paymentAmount int) string {
+	addr := qrbill.Address{
+		AdrTp:            "s",
+		Name:             "Verein Schweizermeisterschaft der Velokurier*innen SUICMC23 BERN c/o Fabio Nef",
+		StrtNmOrAdrLine1: "Dammweg",
+		BldgNbOrAdrLine2: "41",
+		PstCd:            "3013",
+		TwnNm:            "Bern",
+		Ctry:             "CH",
+	}
+	addr.Validate()
+
+	iban := "CH47 0900 0000 1604 1402 0"
+	creditor := qrbill.QRCHCdtrInf{IBAN: iban, Cdtr: addr}
+
+	amount := qrbill.QRCHCcyAmt{
+		Amt: fmt.Sprintf("%v", paymentAmount),
+		Ccy: "CHF",
+	}
+
+	refText := fmt.Sprintf("%s %v %s", name, raceNumber, email)
+
+	q := qrbill.QRCH{
+		Header:    qrbill.QRCHHeader{},
+		CdtrInf:   creditor,
+		UltmtCdtr: addr,
+		CcyAmt:    amount,
+		RmtInf: qrbill.QRCHRmtInf{
+			AddInf: qrbill.QRCHRmtInfAddInf{
+				Ustrd: refText,
+			},
+		},
+	}
+
+	bill, err := q.Encode()
+	if err != nil {
+		log.Println(err)
+	}
+
+	image, err := bill.EncodeToImage()
+	if err != nil {
+		log.Println(err)
+	}
+	buf := new(bytes.Buffer)
+	err = png.Encode(buf, image)
+	if err != nil {
+		log.Println("png encoding failed")
+		log.Println(err)
+	}
+
+	imageData := "data:image/png;base64,"
+	s := base64.StdEncoding.EncodeToString(buf.Bytes())
+	imageData += s
+
+	return imageData
 }
