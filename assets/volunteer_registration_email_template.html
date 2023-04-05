@@ -1,99 +1,97 @@
 <html>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://use.typekit.net/owf7wye.css" />
-    <style>
-        body {
+
+    <body
+        style="
             font-family: 'aktiv-grotesk';
             padding-left: 10%;
             padding-right: 10%;
-        }
+        "
+    >
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="text-align: center">
+                    Your Content
+                    <div style="">
+                        <h1 style="text-align: center; color: #ff3e19">
+                            Thank you for registering to volunteer for SUICMC23
+                            BERN!
+                        </h1>
+                        <img src="{{.Logo}}" width="200" alt="SUICMC23 Logo" />
 
-        h1,
-        h2,
-        h3,
-        h4,
-        span,
-        a {
-            color: #ff3e19;
-        }
+                        <br />
+                        <p>
+                            Hello {{.Name}},
+                            <br />
+                            We are looking forward to welcoming you to Bern at
+                            the end of May, and thank you very much for
+                            volunteering. Please take a moment to read through
+                            this email and feel free to
+                            <a
+                                href="mailto:{{.RegEmail}}"
+                                style="color: #ff3e19"
+                            >
+                                contact us</a
+                            >
+                            if you have any questions.
 
-        h1,
-        h2,
-        h3 {
-            text-align: center;
-            width: 100%;
-        }
+                            <br />
+                            <br />
+                            Stay tuned of more information on our
+                            <a
+                                href="https://suicmc23.ch"
+                                style="color: #ff3e19"
+                            >
+                                website
+                            </a>
+                            and via email ❤️.
+                        </p>
 
-        ul {
-            /* padding-left: 100px; */
-            width: 80%;
-            text-align: left;
-        }
-    </style>
+                        <h2 style="color: #ff3e19">Volunteer Information</h2>
 
-    <body>
-        <div
-            style="
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                align-items: center;
-                justify-content: center;
-            "
-        >
-            <h1 style="text-align: center">
-                Thank you for registering to volunteer for SUICMC23 BERN!
-            </h1>
-            <img src="{{.Logo}}" width="200" alt="SUICMC23 Logo" />
+                        <h4 style="color: #ff3e19">
+                            You selected the following volunteer spots:
+                        </h4>
 
-            <br />
-            <p>
-                Hello {{.Name}},
-                <br />
-                We are looking forward to welcoming you to Bern at the end of
-                May, and thank you very much for volunteering. Please take a
-                moment to read through this email and feel free to
-                <a href="mailto:{{.RegEmail}}"> contact us</a> if you have any
-                questions.
+                        <ul style="width: 80%; text-align: left">
+                            {{if .VolunteerFriday}}
+                            <li>Friday Evening</li>
+                            {{end}} {{if .VolunteerSaturdayMorning}}
+                            <li>Saturday Morning</li>
+                            {{end}} {{if .VolunteerSaturdayAfternoon}}
+                            <li>Saturday Afternoon</li>
+                            {{end}} {{if .VolunteerSaturdayEvening}}
+                            <li>Saturday Evening</li>
+                            {{end}} {{if .VolunteerSundayMorning}}
+                            <li>Sunday Morning</li>
+                            {{end}} {{if .VolunteerSundayAfternoon}}
+                            <li>Sunday Afternoon</li>
+                            {{end}} {{if .VolunteerSundayEvening}}
+                            <li>Sunday Evening</li>
+                            {{end}} {{if .VolunteerMondayMorning}}
+                            <li>Monday Morning</li>
+                            {{end}} {{if .VolunteerMondayAfternoon}}
+                            <li>Monday Afternoon</li>
+                            {{end}}
+                        </ul>
 
-                <br />
-                <br />
-                Stay tuned of more information on our
-                <a href="https://suicmc23.ch"> website </a> and via email ❤️.
-            </p>
+                        <h3 style="color: #ff3e19">
+                            Thanks again for volunteering ❤️. See you at the
+                            event!
+                        </h3>
 
-            <h2>Volunteer Information</h2>
-
-            <h4>You selected the following volunteer spots:</h4>
-
-            <ul>
-                {{if .VolunteerFriday}}
-                <li>Friday Evening</li>
-                {{end}} {{if .VolunteerSaturdayMorning}}
-                <li>Saturday Morning</li>
-                {{end}} {{if .VolunteerSaturdayAfternoon}}
-                <li>Saturday Afternoon</li>
-                {{end}} {{if .VolunteerSaturdayEvening}}
-                <li>Saturday Evening</li>
-                {{end}} {{if .VolunteerSundayMorning}}
-                <li>Sunday Morning</li>
-                {{end}} {{if .VolunteerSundayAfternoon}}
-                <li>Sunday Afternoon</li>
-                {{end}} {{if .VolunteerSundayEvening}}
-                <li>Sunday Evening</li>
-                {{end}} {{if .VolunteerMondayMorning}}
-                <li>Monday Morning</li>
-                {{end}} {{if .VolunteerMondayAfternoon}}
-                <li>Monday Afternoon</li>
-                {{end}}
-            </ul>
-
-            <h3>Thanks again for volunteering ❤️. See you at the event!</h3>
-
-            <div style="padding-top: 10%">
-                If you have any questions please don't hesitate to
-                <a href="mailto:{{.RegEmail}}" ;>contact us.</a>
-            </div>
-        </div>
+                        <div style="padding-top: 10%">
+                            If you have any questions please don't hesitate to
+                            <a
+                                href="mailto:{{.RegEmail}}"
+                                style="color: #ff3e19"
+                                >contact us.</a
+                            >
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
